@@ -17,7 +17,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 2,
   "links": [],
   "liveNow": false,
@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
       "fieldConfig": {
         "defaults": {
@@ -33,8 +33,15 @@
             "mode": "thresholds"
           },
           "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 1
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
           },
           "mappings": [
             {
@@ -66,22 +73,23 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 6,
+        "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 1,
       "maxDataPoints": 500,
       "options": {
-        "colWidth": 0.9,
+        "alignValue": "left",
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
-        "rowHeight": 0.9,
-        "showValue": "auto",
+        "mergeValues": true,
+        "rowHeight": 0.75,
+        "showValue": "never",
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -92,7 +100,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
           "editorMode": "builder",
           "exemplar": false,
@@ -107,35 +115,40 @@
       ],
       "title": "Sync Status",
       "transformations": [],
-      "type": "status-history"
+      "type": "state-timeline"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "mappings": [
-            {
-              "options": {
-                "__name": {
-                  "index": 0,
-                  "text": "name"
-                }
-              },
-              "type": "value"
-            }
-          ],
+          "custom": {
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
               }
             ]
           }
@@ -143,51 +156,54 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
-        "w": 5,
-        "x": 0,
-        "y": 8
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 0
       },
-      "id": 5,
+      "id": 3,
+      "maxDataPoints": 100,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
-        "textMode": "auto"
+        "mergeValues": true,
+        "rowHeight": 0.75,
+        "showValue": "never",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "10.0.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "spacemesh_syncer_layer",
+          "expr": "spacemesh_activation_publish_window_seconds_count{condition=\"ontime\"}",
           "format": "time_series",
           "instant": false,
+          "interval": "300",
           "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Synced Layer",
+      "title": "Activation Publish On Time",
       "transformations": [],
-      "type": "stat"
+      "type": "state-timeline"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "url": "http://prometheus:9090"
       },
       "fieldConfig": {
         "defaults": {
@@ -208,6 +224,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -252,10 +269,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
-        "w": 4,
-        "x": 5,
-        "y": 8
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 6
       },
       "id": 4,
       "options": {
@@ -277,7 +294,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
           "editorMode": "builder",
           "exemplar": false,
@@ -297,7 +314,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
       "fieldConfig": {
         "defaults": {
@@ -305,83 +322,15 @@
             "mode": "thresholds"
           },
           "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 1
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "green",
-                "value": 1
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 15,
-        "x": 9,
-        "y": 8
-      },
-      "id": 3,
-      "maxDataPoints": 300,
-      "options": {
-        "colWidth": 0.9,
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "rowHeight": 0.9,
-        "showValue": "auto",
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "spacemesh_activation_publish_window_seconds_count{condition=\"ontime\"}",
-          "format": "time_series",
-          "instant": false,
-          "interval": "300",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Activation Publish On Time",
-      "transformations": [],
-      "type": "status-history"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "fillOpacity": 70,
-            "lineWidth": 1
+            "fillOpacity": 90,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineWidth": 0,
+            "spanNulls": false
           },
           "mappings": [
             {
@@ -412,21 +361,22 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 15,
-        "x": 9,
-        "y": 15
+        "w": 12,
+        "x": 12,
+        "y": 6
       },
       "id": 6,
-      "maxDataPoints": 500,
+      "maxDataPoints": 100,
       "options": {
-        "colWidth": 0.9,
+        "alignValue": "left",
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
-        "rowHeight": 0.9,
-        "showValue": "auto",
+        "mergeValues": true,
+        "rowHeight": 0.75,
+        "showValue": "never",
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -437,14 +387,14 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
           "editorMode": "builder",
           "exemplar": false,
           "expr": "spacemesh_syncer_sync_state{state=\"atx_synced\"}",
           "format": "time_series",
           "instant": false,
-          "interval": "300",
+          "interval": "600",
           "legendFormat": "{{instance}}",
           "range": true,
           "refId": "A"
@@ -452,13 +402,330 @@
       ],
       "title": "ATX Sync Status",
       "transformations": [],
-      "type": "status-history"
+      "type": "state-timeline"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 13
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 14,
+          "valueSize": 14
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "spacemesh_activation_poet_pow_duration / 1000000000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "{{instance}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Activation POET pow duration",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 13
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 14,
+          "valueSize": 14
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "spacemesh_activation_post_duration / 1000000000",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Activation Post Duration",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "__name": {
+                  "index": 0,
+                  "text": "name"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 6,
+        "y": 13
+      },
+      "id": 5,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "min(spacemesh_syncer_layer)",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Synced Layer min",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "__name": {
+                  "index": 0,
+                  "text": "name"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 9,
+        "y": 13
+      },
+      "id": 17,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(spacemesh_syncer_layer)",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Synced Layer max",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -470,7 +737,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "points",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -478,9 +745,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 3,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -507,55 +778,468 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 5,
         "w": 12,
-        "x": 0,
-        "y": 22
+        "x": 12,
+        "y": 13
       },
-      "id": 2,
+      "id": 10,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "exemplar": false,
-          "expr": "spacemesh_activation_post_duration / 1000000",
+          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\", type=\"commit\"}[5m]))",
           "format": "time_series",
-          "instant": false,
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
           "interval": "",
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{type}}-{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Activation Post Duration",
-      "transformations": [],
+      "title": "Message Latencies Hare Commit",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus-gke-prod"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "sum by(instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\"}[5m]))",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "hr1-{{instance}}",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Message Latencies hr1",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\", type=\"notify\"}[5m]))",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "{{type}}-{{instance}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Message Latencies Hare Notify",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus-gke-prod"
+          },
+          "editorMode": "code",
+          "expr": "sum by(le,instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"pp1\",sign=\"$sign\"}[5m]))",
+          "hide": false,
+          "legendFormat": "pp1-{{instance}}",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Message Latencies pp1",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "url": "http://prometheus:9090"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\", type=\"preround\"}[5m]))",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "{{type}}-{{instance}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Message Latencies Hare Preround",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "url": "http://prometheus:9090"
       },
       "fieldConfig": {
         "defaults": {
@@ -576,6 +1260,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -636,10 +1321,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 5,
         "w": 12,
-        "x": 12,
-        "y": 22
+        "x": 0,
+        "y": 28
       },
       "id": 8,
       "options": {
@@ -674,8 +1359,9 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -687,7 +1373,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "points",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -695,9 +1381,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 3,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -724,50 +1414,58 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 5,
         "w": 12,
-        "x": 0,
-        "y": 31
+        "x": 12,
+        "y": 28
       },
-      "id": 7,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "spacemesh_activation_poet_pow_duration / 1000000",
-          "instant": false,
-          "legendFormat": "{{instance}}",
+          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\", type=\"proposal\"}[5m]))",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "{{type}}-{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Activation POET pow duration",
+      "title": "Message Latencies Hare Proposal",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "url": "http://prometheus:9090"
       },
       "fieldConfig": {
         "defaults": {
@@ -788,6 +1486,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -851,10 +1550,10 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 5,
         "w": 12,
-        "x": 12,
-        "y": 31
+        "x": 0,
+        "y": 33
       },
       "id": 11,
       "options": {
@@ -890,7 +1589,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "e950a980-6eaf-4f13-bd9e-a5f31640f822"
       },
       "description": "",
       "fieldConfig": {
@@ -904,7 +1603,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "points",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -912,9 +1611,13 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
-            "pointSize": 5,
+            "pointSize": 3,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -947,204 +1650,50 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 5,
         "w": 12,
-        "x": 0,
-        "y": 39
+        "x": 12,
+        "y": 33
       },
-      "id": 10,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "10.1.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "url": "http://prometheus:9090"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\"}[5m]))",
+          "expr": "sum by(le, type, instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\", sign=\"$sign\", type=\"status\"}[5m]))",
           "format": "time_series",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "interval": "",
           "legendFormat": "{{type}}-{{instance}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Message Latencies Hare",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "b1-SM0:1010",
-                  "hr1-SM0:1010",
-                  "pp1-SM0:1010"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 48
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus-gke-prod"
-          },
-          "editorMode": "code",
-          "expr": " sum by(le,instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"b1\", sign=\"$sign\"}[5m]))",
-          "hide": false,
-          "legendFormat": "b1-{{instance}}",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus-gke-prod"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum by(le,instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"hr1\",sign=\"$sign\"}[5m]))",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "hr1-{{instance}}",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus-gke-prod"
-          },
-          "editorMode": "code",
-          "expr": "sum by(le,instance) (rate(spacemesh_message_latency_seconds_count{protocol=\"pp1\",sign=\"$sign\"}[5m]))",
-          "hide": false,
-          "legendFormat": "pp1-{{instance}}",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus-gke-prod"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(spacemesh_message_latency_seconds_count{protocol=\"ax1\",sign=\"$sign\"}[5m])) by (le,instance)",
-          "hide": true,
-          "legendFormat": "ax1-{{instance}}",
-          "range": true,
-          "refId": "D"
-        }
-      ],
-      "title": "Message Latencies",
+      "title": "Message Latencies Hare Status",
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
